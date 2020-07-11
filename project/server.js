@@ -10,6 +10,8 @@ mongoose.connect(
         useUnifiedTopology: true
     }
 );
+//URLS
+require('./src/models/Product');
 
 // 1° route
 app.get('/', (req, res) => {
