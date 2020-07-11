@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const requireDir = require('require-dir');
 
 // Init App
 const app = express();
@@ -11,11 +12,19 @@ mongoose.connect(
     }
 );
 //URLS
-require('./src/models/Product');
+requireDir('./src/models');
+
+const Product = mongoose.model('Product');
 
 // 1° route
 app.get('/', (req, res) => {
-    res.send('Hello World')
+    Product.create({
+        title: 'React Native',
+        description: 'Build native apps with',
+        url: 'https://github.com/facebook/react-native'
+    })
+
+    return res.send('Hello World')
 });
 
 // Port
